@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js",
+    "dev": "nodemon index.js"
+
   },
   "repository": {
     "type": "git",
@@ -13,12 +16,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/qadamboevash/final-telegram-bot/issues"
   },
   "homepage": "https://github.com/qadamboevash/final-telegram-bot#readme",
   "dependencies": {
+    "dotenv": "^17.2.3",
     "node-telegram-bot-api": "^0.66.0"
   },
   "devDependencies": {
