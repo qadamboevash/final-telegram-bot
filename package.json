@@ -7,7 +7,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
     "dev": "nodemon index.js                                          "
-
   },
   "repository": {
     "type": "git",
@@ -23,6 +22,7 @@
   "homepage": "https://github.com/qadamboevash/final-telegram-bot#readme",
   "dependencies": {
     "dotenv": "^17.2.3",
+    "mongoose": "^9.0.1",
     "node-telegram-bot-api": "^0.66.0"
   },
   "devDependencies": {
