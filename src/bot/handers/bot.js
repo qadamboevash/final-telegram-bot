@@ -8,7 +8,7 @@ config();
 export const bot = new TelegramBot(process.env.BOT_TOKEN, { polling: true });
 
 const CHANNEL_ID = "@academy_100x_uz";
-// check if user is subscribed to channel
+
 const checkIfUserSubscribed = async (chatId) => {
   try {
     const chatMember = await bot.getChatMember(CHANNEL_ID, chatId);
@@ -29,12 +29,6 @@ bot.on("message", async (msg) => {
   const firstname = msg.chat.first_name;
   const text = msg.text;
 
-  // status
-  // creator - yaratuvchi
-  // member - a'zo
-  // admin - adminstrator
-  // left - tark etgan
-  // kicked - chiqarib yuborilgan
 
   const user_subscribed = await checkIfUserSubscribed(chatId);
 
@@ -101,4 +95,4 @@ bot.on("callback_query", async (query) => {
 
 console.log("Bot ishga tushdi...");
 
-// export { bot };
+export { bot };
