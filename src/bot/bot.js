@@ -3,12 +3,13 @@ import { config } from "dotenv";
 import onStart from "./handlers/onStart.js";
 import onProfile from "./handlers/onProfile.js";
 import onError from "./handlers/onError.js";
+import onCourses from "./handlers/onCourses.js";
 config();
 
 export const bot = new TelegramBot(process.env.BOT_TOKEN, { polling: true });
 
 const CHANNEL_ID = "@academy_100x_uz";
-
+// check if user is subscribed to channel
 const checkIfUserSubscribed = async (chatId) => {
   try {
     const chatMember = await bot.getChatMember(CHANNEL_ID, chatId);
@@ -29,6 +30,12 @@ bot.on("message", async (msg) => {
   const firstname = msg.chat.first_name;
   const text = msg.text;
 
+  // status
+  // creator - yaratuvchi
+  // member - a'zo
+  // admin - adminstrator
+  // left - tark etgan
+  // kicked - chiqarib yuborilgan
 
   const user_subscribed = await checkIfUserSubscribed(chatId);
 
@@ -49,7 +56,7 @@ bot.on("message", async (msg) => {
             ],
             [
               {
-                text: `Obunani tekshirish `,
+                text: `Obunani tekshirish ✅`,
                 callback_data: "confirm_subscribtion",
               },
             ],
@@ -65,6 +72,10 @@ bot.on("message", async (msg) => {
 
   if (text == "/profile") {
     return onProfile(msg);
+  }
+
+  if (text == "📚 Kurslar") {
+    return onCourses(msg);
   }
 
   return onError(msg);
@@ -91,7 +102,21 @@ bot.on("callback_query", async (query) => {
       return onStart(msg);
     }
   }
+
+  if (data == "course_english") {
+    bot.sendMessage(chatId, `Enlish course is selected`, {
+      reply_markup: {
+        inline_keyboard: [
+          [{ text: `Ro'yhatdan o'tish`, callback_data: "register:english" }],
+        ],
+      },
+    });
+
+    bot.deleteMessage(chatId, msg.message_id);
+  }
 });
 
 console.log("Bot ishga tushdi...");
+
+// export { bot };
 
