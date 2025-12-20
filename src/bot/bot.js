@@ -4,9 +4,12 @@ import onStart from "./handlers/onStart.js";
 import onProfile from "./handlers/onProfile.js";
 import onError from "./handlers/onError.js";
 import onCourses from "./handlers/onCourses.js";
+import { onLocation } from "./handlers/onLocation.js";
+
 config();
 
 export const bot = new TelegramBot(process.env.BOT_TOKEN, { polling: true });
+
 
 const CHANNEL_ID = "@academy_100x_uz";
 // check if user is subscribed to channel
@@ -68,17 +71,15 @@ bot.on("message", async (msg) => {
 
   if (text == "/start") {
     return onStart(msg);
-  }
-
-  if (text == "/profile") {
-    return onProfile(msg);
-  }
-
-  if (text == "📚 Kurslar") {
+  } else if (text == "📚 Kurslar") {
     return onCourses(msg);
+  }else if (text == "ℹ️ Markaz haqida") {
+    return onLocation(msg);
+  }
+  else {
+    return onError(msg);
   }
 
-  return onError(msg);
 });
 
 bot.on("callback_query", async (query) => {
@@ -102,21 +103,130 @@ bot.on("callback_query", async (query) => {
       return onStart(msg);
     }
   }
-
   if (data == "course_english") {
-    bot.sendMessage(chatId, `Enlish course is selected`, {
-      reply_markup: {
-        inline_keyboard: [
-          [{ text: `Ro'yhatdan o'tish`, callback_data: "register:english" }],
-        ],
-      },
-    });
+    bot.sendMessage(
+      chatId,
+      `
+     🇬🇧 Ingliz tili kursi haqida:
 
-    bot.deleteMessage(chatId, msg.message_id);
+📆 Davomiyligi: 3 oy  
+⏰ Darslar: Haftasiga 3 marta (1,5 soatdan)  
+👨‍🏫 O‘qituvchi: Tajribali filologlar  
+💰 Narxi: 350 000 so‘m / oy
+
+✍️ Agar sizni bu kurs qiziqtirsa, “Ro‘yxatdan o‘tish” tugmasini bosing.
+ `,
+      {
+        reply_markup: {
+          inline_keyboard: [
+            [{ text: "✍️ Ro‘yxatdan o‘tish", callback_data: "register:english" }],
+          ],
+
+        }
+      },
+      
+
+    );
+  } else if (data == "course_russian") {
+    bot.sendMessage(
+      chatId,
+      `
+        🇷🇺 Rus tili kursi haqida:
+
+📆 Davomiyligi: 4 oy  
+⏰ Darslar: Haftasiga 3 marta (1,5 soatdan)  
+👨‍🏫 O‘qituvchi: Tajribali filologlar  
+💰 Narxi: 350 000 so‘m / oy
+
+✍️ Agar sizni bu kurs qiziqtirsa, “Ro‘yxatdan o‘tish” tugmasini bosing.
+
+        `,
+      {
+        reply_markup: {
+          inline_keyboard: [
+            [{ text: "✍️ Ro‘yxatdan o‘tish", callback_data: "register:english" }],
+          ],
+
+        }
+      },
+
+    );
+  } else if (data == "course_math") {
+    bot.sendMessage(
+      chatId,
+      `
+        🧮 Matematika kursi haqida:
+
+📆 Davomiyligi: 3 oy  
+⏰ Darslar: Haftasiga 3 marta (1,5 soatdan)  
+👨‍🏫 O‘qituvchi: Tajribali filologlar  
+💰 Narxi: 300 000 so‘m / oy
+
+✍️ Agar sizni bu kurs qiziqtirsa, “Ro‘yxatdan o‘tish” tugmasini bosing.
+
+
+        `,
+      {
+        reply_markup: {
+          inline_keyboard: [
+            [{ text: "✍️ Ro‘yxatdan o‘tish", callback_data: "register:english" }],
+          ],
+
+        }
+      },
+
+    );
+  } else if (data == "course_programming") {
+    bot.sendMessage(
+      chatId,
+      `
+        💻 Dasturlash kursi haqida:
+
+📆 Davomiyligi: 5 oy  
+⏰ Darslar: Haftasiga 3 marta (1,5 soatdan)  
+👨‍🏫 O‘qituvchi: Tajribali filologlar  
+💰 Narxi: 250 000 so‘m / oy
+
+✍️ Agar sizni bu kurs qiziqtirsa, “Ro‘yxatdan o‘tish” tugmasini bosing.
+
+        `,
+      {
+        reply_markup: {
+          inline_keyboard: [
+            [{ text: "✍️ Ro‘yxatdan o‘tish", callback_data: "register:english" }],
+          ],
+
+        }
+      },
+
+    );
+  } else if (data == "course_design") {
+    bot.sendMessage(
+      chatId,
+      `
+        🎨 Grafik dizayn kursi haqida:
+
+📆 Davomiyligi: 4 oy  
+⏰ Darslar: Haftasiga 3 marta (1,5 soatdan)  
+👨‍🏫 O‘qituvchi: Tajribali filologlar  
+💰 Narxi: 350 000 so‘m / oy
+
+✍️ Agar sizni bu kurs qiziqtirsa, “Ro‘yxatdan o‘tish” tugmasini bosing.
+
+        `,
+       {
+        reply_markup: {
+          inline_keyboard: [
+            [{ text: "✍️ Ro‘yxatdan o‘tish", callback_data: "register:english" }],
+          ],
+
+        }
+      },
+
+    );
   }
+
 });
 
 console.log("Bot ishga tushdi...");
-
-// export { bot };
 

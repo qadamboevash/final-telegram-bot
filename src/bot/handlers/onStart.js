@@ -32,4 +32,5 @@ Quyidagi menyudan kerakli bo‘limni tanlang 👇
   );
 }
 
+
 export default onStart;
