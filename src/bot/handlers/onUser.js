@@ -6,7 +6,7 @@ async function onUsers(chatId) {
     const usersCount = await User.countDocuments();
     bot.sendMessage(chatId, `Foydalanuvchilar soni: ${usersCount}`);
   } else {
-    bot.sendMessage(chatId, `Bunday buyruq mavjud emas...`);
+    bot.sendMessage(chatId, `Bunday buyruq mav jud emas...`);
   }
 }
 

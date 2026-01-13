@@ -6,6 +6,7 @@ import onError from "./handlers/onError.js";
 import onCourses from "./handlers/onCourses.js";
 import { onLocation } from "./handlers/onLocation.js";
 
+
 config();
 
 export const bot = new TelegramBot(process.env.BOT_TOKEN, { polling: true });
